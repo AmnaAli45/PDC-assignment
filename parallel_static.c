@@ -2,7 +2,7 @@
 #include <omp.h>
 #include <stdlib.h> //library  to generate random numbers
 
-#define SIZE 1000000 // Large array size for meaningful parallelization
+
 
 void countStaticEvenOddParallel(int arr[], int size) {
     int even = 0, odd = 0; //variables to store even and odd numbers in array
@@ -24,26 +24,32 @@ void countStaticEvenOddParallel(int arr[], int size) {
 }
 
 int main() {
-    int arr[SIZE]; //declaring an array
+    int arrsize []={200000,500000,1000000}; //defining different array sizes
     int num_threads[] = { 4, 8 ,12};    // Test different thread counts
 
     
     
 
-
-    // Initialize array with random numbers
-    for (int i = 0; i < SIZE; i++) {
+   //executing function for different array sizes
+       for (int i = 0; i < 3; i++) {
+        int N = arrsize[i]; 
+        printf("\nArray Size:  %d\n", N);
+        int arr[N]; //initializing array with different sizes
+        // Initialize array with random numbers according to array size
+    for (int i = 0; i < N; i++) {
         arr[i] = rand() % 1000;  // it will generate random numbers between0 and 999
     }
 
+   
+    
     //executing same code for different number of threads  and calculating execution time for each number of threads
+    
     for (int t = 0; t < 3; t++) {
-        omp_set_num_threads(num_threads[t]);
+        omp_set_num_threads(num_threads[t]); //defining number of threads
         printf("\n--- Testing with %d Threads ---\n", num_threads[t]);
-    
-    
-    countStaticEvenOddParallel(arr, SIZE);
+    countStaticEvenOddParallel(arr, N);
     }
+}
     
 
     return 0;
