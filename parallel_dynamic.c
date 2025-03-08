@@ -28,7 +28,7 @@ void countDynamicEvenOddParallel(int arr[], int size) {
 int main() {
     int arr[SIZE]; 
     
-    
+    int num_threads[] = {1, 4, 8 ,12};    // Test different thread counts
 
 
     // Initialize array with random numbers
@@ -38,9 +38,15 @@ int main() {
 
     printf("\n=== Counting Even and Odd Numbers ===\n");
     
+    //executing same code for different number of threads  and calculating execution time for each number of threads
     
+    for (int t = 0; t < 4; t++) {
+        omp_set_num_threads(num_threads[t]); //defining number of threads
+        printf("\n--- Testing with %d Threads ---\n", num_threads[t]);
     
     countDynamicEvenOddParallel(arr, SIZE);
+    
+    }
     
 
     return 0;
