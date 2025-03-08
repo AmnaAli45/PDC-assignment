@@ -25,6 +25,8 @@ void countStaticEvenOddParallel(int arr[], int size) {
 
 int main() {
     int arr[SIZE]; //declaring an array
+    int num_threads[] = { 4, 8 ,12};    // Test different thread counts
+
     
     
 
@@ -34,9 +36,14 @@ int main() {
         arr[i] = rand() % 1000;  // it will generate random numbers between0 and 999
     }
 
-    printf("\n=== Counting Even and Odd Numbers ===\n");
-
+    //executing same code for different number of threads  and calculating execution time for each number of threads
+    for (int t = 0; t < 3; t++) {
+        omp_set_num_threads(num_threads[t]);
+        printf("\n--- Testing with %d Threads ---\n", num_threads[t]);
+    
+    
     countStaticEvenOddParallel(arr, SIZE);
+    }
     
 
     return 0;
