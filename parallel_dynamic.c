@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <omp.h>
 #include <stdlib.h> //library  to generate random numbers
-
-#define SIZE 1000000 // Large array size for meaningful parallelization
+//#define SIZE 1000000 // Large array size for meaningful parallelization
 
 //creating a function to count even and odd numbers in a given array. This function executes parallely.
 void countDynamicEvenOddParallel(int arr[], int size) {
@@ -26,13 +25,17 @@ void countDynamicEvenOddParallel(int arr[], int size) {
 }
 
 int main() {
-    int arr[SIZE]; 
     
+    int arrsize []={200000,500000,1000000}; //defining different array sizes
     int num_threads[] = {1, 4, 8 ,12};    // Test different thread counts
 
 
-    // Initialize array with random numbers
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < 3; i++) {
+        int N = arrsize[i]; 
+        printf("\nArray Size:  %d\n", N);
+        int arr[N]; //initializing array with different sizes
+        // Initialize array with random numbers according to array size
+    for (int i = 0; i < N; i++) {
         arr[i] = rand() % 1000;  // it will generate random numbers between0 and 999
     }
 
@@ -44,9 +47,10 @@ int main() {
         omp_set_num_threads(num_threads[t]); //defining number of threads
         printf("\n--- Testing with %d Threads ---\n", num_threads[t]);
     
-    countDynamicEvenOddParallel(arr, SIZE);
+    countDynamicEvenOddParallel(arr, N);
     
     }
+}
     
 
     return 0;
