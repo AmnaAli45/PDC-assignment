@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
-
+ double start,end,totaltime; // global variables to calculate execution time 
+ int even = 0, odd = 0; // global variables to store even and odd count of an array
 
 
 //creating a function to count even and odd numbers in a given array. This function executes sequentially.
 
 void countEvenOddSequential(int arr[], int size) {
-    int even = 0, odd = 0; // variables to store even and odd count of an array
+    
 
-    double start = omp_get_wtime();//function of OMP used to calculate the execution time. starting time is stored.
+     start = omp_get_wtime();//function of OMP used to calculate the execution time. starting time is stored.
 
     //whenever an odd number comes in array it will incement even otherwise odd will be incremented.
     //this loop will execute until whole array is explored.
@@ -20,9 +21,9 @@ void countEvenOddSequential(int arr[], int size) {
             odd++;
     }
 
-    double end = omp_get_wtime(); //ending execution time is stored in end variable 
-    printf("Sequential Execution:\nEven Numbers are: %d\nOdd Numbers are: %d\n", even, odd);
-    printf("Time Taken: %.6f sec\n\n", end - start); //end-start gives the total execution time of the code
+     end = omp_get_wtime(); //ending execution time is stored in end variable 
+     totaltime= end - start; //end-start gives the total execution time of the code
+    
 }
 
 int main() {
@@ -37,9 +38,16 @@ int main() {
     for (int i = 0; i < N; i++) {
         arr[i] = rand() % 1000;  // it will generate random numbers between0 and 999
     }
-
     printf("\n===...... Counting Even and Odd Numbers ....===\n");
-    countEvenOddSequential(arr, N); 
+    //execute the function 10 times and calculate execution time of each run
+    for(int i=0;i<10;i++){
+        countEvenOddSequential(arr, N); 
+    }
+
+    
+    printf("Sequential Execution:\nEven Numbers are: %d\nOdd Numbers are: %d\n", even, odd);
+    printf("Average Time Taken: %.6f sec\n\n", totaltime/10); // printing the average execution time of 10 runs
+    
         
     }
     
