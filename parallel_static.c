@@ -6,6 +6,7 @@
 
 void countStaticEvenOddParallel(int arr[], int size) {
     int even = 0, odd = 0; //variables to store even and odd numbers in array
+    double start = omp_get_wtime();// start is a variable to starting execution time of the function
     
   //function to count even and odd numbers in a given array parallely
     #pragma omp parallel for schedule(static) reduction(+:even, odd)
@@ -16,9 +17,9 @@ void countStaticEvenOddParallel(int arr[], int size) {
             odd++;
     }
     
-
-   
-    printf("Parallel static Execution:\nEven Count: %d, Odd Count: %d\n", even, odd);
+    double end = omp_get_wtime();// end is a variable to starting execution time of the function
+   printf("Parallel static Execution:\nEven Count: %d, Odd Count: %d\n", even, odd);
+   printf("Time Taken: %.6f sec\n\n", end - start);//end-start gives the total execution time of the code
     
 }
 
