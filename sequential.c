@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <omp.h>
 
-#define SIZE 1000000 // defining the size of array 
+
 
 //creating a function to count even and odd numbers in a given array. This function executes sequentially.
 
@@ -26,18 +26,23 @@ void countEvenOddSequential(int arr[], int size) {
 }
 
 int main() {
-    int arr[SIZE]; //declaring an array of definesd size
+    int arrsize []={200000,500000,1000000}; //defining different array sizes
     
-    // Initialize array with random numbers
-    for (int i = 0; i < SIZE; i++) {
+    //executing the function for different array sizes
+    for (int i = 0; i < 3; i++) {
+        int N = arrsize[i];
+        printf("\nArray Size:  %d\n", N);
+        int arr[N];
+        // Initialize array with random numbers
+    for (int i = 0; i < N; i++) {
         arr[i] = rand() % 1000;  // it will generate random numbers between0 and 999
     }
 
     printf("\n===...... Counting Even and Odd Numbers ....===\n");
-    countEvenOddSequential(arr, SIZE); 
+    countEvenOddSequential(arr, N); 
+        
+    }
     
-    
-
     return 0;
 }
 
