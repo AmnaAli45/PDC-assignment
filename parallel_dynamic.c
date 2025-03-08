@@ -7,7 +7,8 @@
 //creating a function to count even and odd numbers in a given array. This function executes parallely.
 void countDynamicEvenOddParallel(int arr[], int size) {
     int evenCount = 0, oddCount = 0;
-    
+    double start = omp_get_wtime();// start is a variable to starting execution time of the function
+
     //using dynamic scheduling to execute for loop parallely
     //reduction is used to handle race condition and critical section
     #pragma omp parallel for schedule(dynamic) reduction(+:evenCount, oddCount)
@@ -18,9 +19,9 @@ void countDynamicEvenOddParallel(int arr[], int size) {
             oddCount++;
     }
 
-
-    
+    double end = omp_get_wtime(); //end is a variable to starting execution time of the function
     printf("Parallel dynamic Execution:\nEven Count: %d, Odd Count: %d\n", evenCount, oddCount);
+    printf("Time Taken: %.6f sec\n\n", end - start); //end-start gives the total execution time of the code
     
 }
 
