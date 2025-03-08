@@ -41,16 +41,17 @@ int main() {
         arr[i] = rand() % 1000;  // it will generate random numbers between0 and 999
     }
 
-   // printf("\n=== Counting Even and Odd Numbers ===\n");
+   
     
     //executing same code for different number of threads  and calculating execution time for each number of threads
     
     for (int t = 0; t < 3; t++) {
         omp_set_num_threads(num_threads[t]); //defining number of threads
         printf("\n--- Testing with %d Threads ---\n", num_threads[t]);
+        double totaltime = 0.0;
     for(int i=0;i<10;i++){ 
     countDynamicEvenOddParallel(arr, N);
-    totaltime+=totaltime; //calculating total time
+    totaltime+=end-start; //calculating total time
     }
     
     printf(" Average Time Taken: %.6f sec\n\n", totaltime/10); //end-start gives the total execution time of the code
