@@ -8,7 +8,9 @@
 
 void countEvenOddSequential(int arr[], int size) {
     int even = 0, odd = 0; // variables to store even and odd count of an array
-    
+
+    double start = omp_get_wtime();//function of OMP used to calculate the execution time. starting time is stored.
+
     //whenever an odd number comes in array it will incement even otherwise odd will be incremented.
     //this loop will execute until whole array is explored.
     for (int i = 0; i < size; i++) {
@@ -18,9 +20,9 @@ void countEvenOddSequential(int arr[], int size) {
             odd++;
     }
 
-    
+    double end = omp_get_wtime(); //ending execution time is stored in end variable 
     printf("Sequential Execution:\nEven Numbers are: %d\nOdd Numbers are: %d\n", even, odd);
-    
+    printf("Time Taken: %.6f sec\n\n", end - start); //end-start gives the total execution time of the code
 }
 
 int main() {
