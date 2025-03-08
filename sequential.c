@@ -38,9 +38,11 @@ int main() {
     for (int i = 0; i < N; i++) {
         arr[i] = rand() % 1000;  // it will generate random numbers between0 and 999
     }
+    totaltime=0.0;
     printf("\n===...... Counting Even and Odd Numbers ....===\n");
     //execute the function 10 times and calculate execution time of each run
     for(int i=0;i<10;i++){
+        totaltime=end-start;
         countEvenOddSequential(arr, N); 
     }
 
